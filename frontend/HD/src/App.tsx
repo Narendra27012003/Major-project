@@ -7,25 +7,27 @@ import "./App.css";
 import ProtectedComponent from "./components/layout/ProtectedComponent";
 import ThankYou from "./pages/Thankyou";
 import PredictPage from "./pages/PredictPage";
+import ChatBotPage from "./components/ChatBotPage"; // 👈 Import Chatbot Page
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-  <Route path="/" element={<MainLayout />}>
-    <Route index element={<Home />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
 
-    {/* Protected Routes */}
-    <Route path="/" element={<ProtectedComponent />}>
-      <Route path="/predict" element={<PredictPage />} />
-      <Route path="/thank-you" element={<ThankYou />} />
-    </Route>
+          {/* Protected Routes */}
+          <Route element={<ProtectedComponent />}>
+            <Route path="/predict" element={<PredictPage />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/chatbot" element={<ChatBotPage />} /> {/* 👈 Add ChatBotPage here */}
+          </Route>
 
-    {/* Public Routes */}
-    <Route path="auth/login" element={<Login />} />
-    <Route path="auth/signup" element={<Signup />} />
-  </Route>
-</Routes>
+          {/* Public Routes */}
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/signup" element={<Signup />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
