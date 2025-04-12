@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.auth import router as auth_router
 from app.api.dummy import router as dummy_router
 from app.db.database import Base, engine
+from app.api.heart_prediction import router as heart_router
 
 # Set Windows event loop policy for Playwright compatibility
 if os.name == 'nt':
@@ -40,4 +41,5 @@ app.add_middleware(
 # Include routers
 app.include_router(auth_router)
 app.include_router(dummy_router)
+app.include_router(heart_router)
 

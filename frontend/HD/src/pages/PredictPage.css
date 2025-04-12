@@ -1,0 +1,145 @@
+
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Top Navbar */
+.nav {
+  height: 60px;
+  width: 100%;
+  background-color: #f0eef0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 30px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links a {
+  color: white;
+  background-color: #ffffff;
+  color: #4d0d6a;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin-left: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #ececec;
+}
+
+section {
+  background-image: url("https://img.freepik.com/free-vector/hospital-building-healthcare-cartoon-background-vector-illustration-with-ambulance-car-doctor-patient-nurses-medical-clinic-exterior_2175-1511.jpg?w=2000");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+
+/* Prediction Form Container */
+.container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+}
+
+/* Title */
+h1#title {
+  font-family: "Abril Fatface", cursive;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputwrap {
+  margin-bottom: 20px;
+}
+
+label.bold {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+input,
+select {
+  padding: 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: #7d28a8;
+}
+
+/* Predict Button */
+button {
+  margin-top: 30px;
+  padding: 14px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  background-color: #4d0d6a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #5d1682;
+}
+
+/* Result Text */
+h2 {
+  text-align: center;
+  margin-top: 30px;
+  color: #333;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+
+  .nav {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .nav-links a {
+    margin-left: 8px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  h1#title {
+    font-size: 2rem;
+  }
+}

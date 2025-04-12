@@ -4,26 +4,28 @@ import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import Home from "./pages/Home";
 import "./App.css";
-import DemoDetails from "./pages/DemoDetails";
 import ProtectedComponent from "./components/layout/ProtectedComponent";
 import ThankYou from "./pages/Thankyou";
+import PredictPage from "./pages/PredictPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/" element={<ProtectedComponent />}>
-            <Route path="/demo" element={<DemoDetails />} />
-            <Route path="/thank-you" element={<ThankYou />} />
-            {/* <Route path="home" element={<Home />} /> */}
-          </Route>
+  <Route path="/" element={<MainLayout />}>
+    <Route index element={<Home />} />
 
-          <Route path="auth/login" element={<Login />} />
-          <Route path="auth/signup" element={<Signup />} />
-        </Route>
-      </Routes>
+    {/* Protected Routes */}
+    <Route path="/" element={<ProtectedComponent />}>
+      <Route path="/predict" element={<PredictPage />} />
+      <Route path="/thank-you" element={<ThankYou />} />
+    </Route>
+
+    {/* Public Routes */}
+    <Route path="auth/login" element={<Login />} />
+    <Route path="auth/signup" element={<Signup />} />
+  </Route>
+</Routes>
     </BrowserRouter>
   );
 }

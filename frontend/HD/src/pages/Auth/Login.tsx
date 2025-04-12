@@ -17,7 +17,8 @@ function Login() {
     try {
       const { data } = await signin(formData);
       localStorage.setItem("token", data.access_token);
-      navigate("/demo");
+      navigate("/predict");
+
     } catch (error: any) {
       alert(error.response?.data?.detail || "Login failed");
     }

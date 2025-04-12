@@ -1,12 +1,14 @@
-
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 function ProtectedComponent() {
-    const {pathname} = useLocation();
-    const isLoggedIn = true;
+  const token = localStorage.getItem("token");  // 🛡️ Get token from localStorage
 
+  if (!token) {
+    // No token means not logged in ➔ redirect to login page
+    return <Navigate to="/auth/login" replace />;
+  }
 
-    return isLoggedIn? <Outlet/> : <Navigate to="/auth/signin" state={{from: pathname}} replace/>
+  return <Outlet />;  // Token exists ➔ allow access
 }
 
-export default ProtectedComponent
+export default ProtectedComponent;
