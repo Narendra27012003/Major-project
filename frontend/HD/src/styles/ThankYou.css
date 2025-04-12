@@ -1,0 +1,22 @@
+.thank-you-slide {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: 20px 100%, 100% 20px, 100% 100%;
+}
+
+.thank-you-slide h1 {
+  font-size: 48px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.thank-you-slide p {
+  font-size: 18px;
+  color: white;
+}

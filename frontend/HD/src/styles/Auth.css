@@ -1,0 +1,36 @@
+.auth-page {
+  height: 100vh;
+  background: transparent; /* Because MainLayout already sets background */
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-grid {
+  flex: 1;
+  display: flex;
+  padding: 50px;
+}
+
+.auth-text {
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+}
+
+.auth-text h1 {
+  font-size: 48px;
+}
+
+.auth-text p {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.switch-auth {
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+}

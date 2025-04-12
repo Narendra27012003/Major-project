@@ -1,0 +1,89 @@
+/* Style for inactive slides */
+.slide {
+  transform: scale(0.7);
+  transition: transform 300ms;
+  opacity: 0.5;
+}
+
+/* Style for the active slide */
+.activeSlide {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Wrapper for centering the card content */
+.slideWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style for the card content */
+.card-content {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 41px;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  font-family: "Courier New", Courier, monospace;
+  background-color: #000; /* Black background to match your image */
+  color: #fff; /* White text to match your image */
+  padding: 20px 40px; /* Adjust padding as needed */
+
+  border-radius: 10px; /* Rounded corners to match your image */
+  text-align: center; /* Center the text */
+  min-height: 160px; /* Minimum height for visibility */
+  width: 100%; /* Ensure it fills the slide */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+}
+.content-container {
+  width: 60px;
+}
+
+/* Style for the previous arrow */
+.prevArrow {
+  position: absolute;
+  top: 30%;
+  left: 60px;
+  z-index: 100;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #fff; /* White text */
+  padding: 10px; /* Padding for better click area */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Style for the next arrow */
+.nextArrow {
+  position: absolute;
+  top: 30%;
+  right: 60px;
+  z-index: 100;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #fff; /* White text */
+  padding: 10px; /* Padding for better click area */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Ensure the slider container has a defined width */
+.slick-initialized {
+  width: 80%;
+}
+
+/* Remove unused image styles since arrows now use text */
+.prevArrow img,
+.nextArrow img {
+  display: none; /* Hide any image references */
+}
+
+/* Ensure horizontal layout */
+.slick-track {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+/* Define slide width for consistent spacing */
+.slick-slide {
+  width: 400px !important; /* Adjust based on your card width */
+}
+
