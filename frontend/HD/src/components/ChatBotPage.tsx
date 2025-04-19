@@ -57,11 +57,14 @@ function ChatBotPage() {
     setMessages((prev) => [...prev, "You: " + input]);
 
     try {
+      
       const response = await fetch("http://localhost:8000/ask-ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({ messages: [...messages, "You: " + input] }),
       });
+
+      
 
       const data = await response.json();
       setMessages((prev) => [...prev, "AI: " + data.response]);
