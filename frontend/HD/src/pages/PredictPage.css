@@ -71,16 +71,25 @@ h1#title {
 form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+
+/* Ensure full width for long fields (like name/email buttons etc.) */
+.inputwrap.full {
+  grid-column: span 2;
 }
 
 .inputwrap {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 label.bold {
   font-weight: 600;
   margin-bottom: 8px;
 }
+
 
 input,
 select {
