@@ -3,6 +3,7 @@ import os
 import sys
 
 from app.api import voice_chat
+from app.api import ai_pdf
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -45,4 +46,5 @@ app.include_router(auth_router)
 app.include_router(dummy_router)
 app.include_router(heart_router)
 app.include_router(voice_chat.router)
+app.include_router(ai_pdf.router)
 

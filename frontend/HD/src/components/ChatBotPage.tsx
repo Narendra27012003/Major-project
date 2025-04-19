@@ -21,7 +21,7 @@ function ChatBotPage() {
     }
 
     const SpeechRecognitionClass =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognitionClass();
     recognition.lang = "en-US";
     recognition.interimResults = false;
@@ -30,7 +30,7 @@ function ChatBotPage() {
     recognition.onresult = (event: any) => {
       const speechResult = event.results[0][0].transcript;
       console.log("Speech received: " + speechResult);
-      setInput(speechResult); // Set spoken text into input field
+      setInput(speechResult);
     };
 
     recognition.onerror = (event: any) => {
@@ -55,9 +55,9 @@ function ChatBotPage() {
     if (input.trim() === "") return;
 
     setMessages((prev) => [...prev, "You: " + input]);
-    
+
     try {
-      const response = await fetch("http://localhost:8000/ask-ai", {  // 🎯 Your backend AI endpoint
+      const response = await fetch("http://localhost:8000/ask-ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: input }),
@@ -72,9 +72,31 @@ function ChatBotPage() {
     }
   };
 
+  const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("http://localhost:8000/analyze-pdf", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      setMessages((prev) => [...prev, "📎 PDF Uploaded.", "AI: " + data.suggestion]);
+    } catch (err) {
+      setMessages((prev) => [...prev, "AI: Failed to analyze PDF."]);
+    }
+  };
+
   return (
     <div className="chatbot-page">
       <h1>🧠 AI Assistant</h1>
+
+      <input type="file" accept="application/pdf" onChange={handlePdfUpload} style={{ marginBottom: "10px" }} />
 
       <div className="chat-window">
         {messages.map((msg, idx) => (
