@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import Column, DateTime, Float, Integer, String
-from app.db.database import Base
+from app.db.base_class import Base  # ✅ Import Base from the shared base file
 
 class User(Base):
     __tablename__ = "users"
@@ -9,7 +9,6 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
-
 
 class Prediction(Base):
     __tablename__ = "predictions"

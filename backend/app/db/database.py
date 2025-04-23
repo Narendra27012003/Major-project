@@ -1,15 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
+from app.db.base_class import Base  # ✅ Correct Base import
 
-engine = create_engine(settings.DATABASE_URL)
+DATABASE_URL = settings.DATABASE_URL
+
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
 
-
-
-# 👇 Import your models here so they get registered
+# ✅ Import models so that Base.metadata knows about them
 from app.db import models
 
-# ✅ Create tables now
+# ✅ Create tables
 Base.metadata.create_all(bind=engine)

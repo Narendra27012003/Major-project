@@ -10,11 +10,23 @@ from sklearn.metrics import accuracy_score
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import jwt, JWTError
+from sqlalchemy.orm import Session
+
 from app.core.config import settings
+from app.db.models import Prediction  # ✅ Your Prediction model here
+from app.db.database import SessionLocal  # ✅ Import database session factory
 
 router = APIRouter(tags=["Heart Disease Prediction"])
-
 security = HTTPBearer()
+
+# ✅ Add DB session dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 # Dependency to get current user
 def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
@@ -72,7 +84,11 @@ class HeartDiseaseInput(BaseModel):
     thal: int
 
 @router.post("/predict", summary="Heart Disease Prediction", description="Predict heart disease risk (authorized users only)")
-async def predict(data: HeartDiseaseInput, user: str = Depends(get_current_user)):
+async def predict(
+    data: HeartDiseaseInput,
+    user: str = Depends(get_current_user),
+    db: Session = Depends(get_db)  # 👈 Add DB
+):
     input_features = np.array([
         data.age, data.gender, data.cp, data.trestbps, data.chol,
         data.fbs, data.restecg, data.thalach, data.exang,
@@ -85,6 +101,33 @@ async def predict(data: HeartDiseaseInput, user: str = Depends(get_current_user)
 
     logistic_result = "High Risk of Heart Disease" if log_pred == 1 else "Low Risk of Heart Disease"
     randomforest_result = "High Risk of Heart Disease" if rf_pred == 1 else "Low Risk of Heart Disease"
+
+    # ✅ Store in DB
+    prediction = Prediction(
+        user=user,
+        name="N/A",  # Or modify to include name/email in HeartDiseaseInput
+        email="N/A",
+        age=data.age,
+        gender=data.gender,
+        cp=data.cp,
+        trestbps=data.trestbps,
+        chol=data.chol,
+        fbs=data.fbs,
+        restecg=data.restecg,
+        thalach=data.thalach,
+        exang=data.exang,
+        oldpeak=data.oldpeak,
+        slope=data.slope,
+        ca=data.ca,
+        thal=data.thal,
+        logistic_result=logistic_result,
+        randomforest_result=randomforest_result,
+        logistic_accuracy=round(log_acc, 2),
+        randomforest_accuracy=round(rf_acc, 2)
+    )
+
+    db.add(prediction)
+    db.commit()
 
     return JSONResponse(content={
         "user": user,
